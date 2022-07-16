@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
     AudioSource[] _audioSources = new AudioSource[(int)Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
-    public void Awake()
+    public void Start()
     {
         GameManager.Instance().addSoundManager(gameObject.GetComponent<SoundManager>());
         GameObject root = GameObject.Find("@Sound");
