@@ -10,7 +10,7 @@ public class PlayerHandController : MonoBehaviour
     private string otherHandName;
     //private bool isDumbelGripRight;
     //private bool isDumbelGripLeft;
-    protected int count;
+    protected int count = 0;
     protected Vector3 initialDumbbellPos;
     protected bool isDumbbellGrip;
     protected bool isOutofTrackLine;
@@ -43,14 +43,14 @@ public class PlayerHandController : MonoBehaviour
 
     void Update()
     {
-        
+
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log(isDumbbellGrip);
             dumbbell.transform.position = initialDumbbellPos;
             otherHand.dumbbell.transform.position = otherHand.initialDumbbellPos;
-            dumbbell.gameObject.transform.parent=null;
-            otherHand.dumbbell.gameObject.transform.parent=null;
+            dumbbell.gameObject.transform.parent = null;
+            otherHand.dumbbell.gameObject.transform.parent = null;
 
             isDumbbellGrip = false;
             otherHand.isDumbbellGrip = false;
@@ -95,23 +95,30 @@ public class PlayerHandController : MonoBehaviour
                 endPoint.SetActive(true);
                 otherHand.trackLine.SetActive(true);
                 otherHand.endPoint.SetActive(true);
+                if (count == 0)
+                {
+                    Debug.Log(count);
+                    GameManager.Instance().setStartExercise(true);
+                }
+                else
+                {
+                    Debug.Log(count);
+                    GameManager.Instance().addTimesOfExercise();
+                }
                 count++;
                 otherHand.count++;
             }
-            if (count == 0)
-                GameManager.Instance().setStartExercise(true);
-            else
-                GameManager.Instance().addTimesOfExercise();
-
-
         }
         if (other.gameObject.name.Contains("TrackLine" + controllerName))
         {
             //트랙 경로가 닿은 만큼 줄어들기(Slider처럼)
-            isOutofTrackLine = true;
+            isOutofTrackLine = false;
+            isOnStartPos = false;
+
         }
         if (other.gameObject.name.Contains("EndPoint" + controllerName))
         {
+            startPoint.SetActive(true);
             reachEndPoint = true;
         }
 
@@ -138,5 +145,4 @@ public class PlayerHandController : MonoBehaviour
     {
         isExercise = false;
     }
-
 }

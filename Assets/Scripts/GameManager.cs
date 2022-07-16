@@ -33,10 +33,10 @@ public class GameManager : MonoBehaviour
     }
 
     private float gameTime = 0f;
-    private int[] timesOfExercise;
+    private int[] timesOfExercise = new int[3];
     private int currentTimesOfExercise;
     private int currentSetOfExercise;
-    private int maxTimesOfExercise = 10;
+    private int maxTimesOfExercise = 2;
     private int maxSetOfExercise = 3;
     private bool grabDumbbell = false;
     private bool startExercise = false;
@@ -70,8 +70,10 @@ public class GameManager : MonoBehaviour
 
     public void completeSetOfExercise()
     {
+        currentTimesOfExercise = 0;
         currentSetOfExercise += 1;
         Debug.Log("currentSetOfExercise" + currentSetOfExercise);
+        // playerHandController.endOneSet();
         if (currentSetOfExercise == maxSetOfExercise)
         {
             completeTotalExercise();
