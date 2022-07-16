@@ -43,12 +43,14 @@ public class PlayerHandController : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log(isDumbbellGrip);
             dumbbell.transform.position = initialDumbbellPos;
-            otherHand.transform.position = otherHand.initialDumbbellPos;
-            dumbbell.gameObject.transform.parent = null;
+            otherHand.dumbbell.transform.position = otherHand.initialDumbbellPos;
+            dumbbell.gameObject.transform.parent=null;
+            otherHand.dumbbell.gameObject.transform.parent=null;
 
             isDumbbellGrip = false;
             otherHand.isDumbbellGrip = false;
