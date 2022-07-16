@@ -41,10 +41,16 @@ public class GameManager : MonoBehaviour
     private bool grabDumbbell = false;
     private bool startExercise = false;
     private PlayerHandController playerHandController = null;
+    public GameObject TrackLineL;
+    public GameObject TrackLineR;
+    public GameObject StartPosL;
+    public GameObject StartPosR;
+    public GameObject EndPointL;
+    public GameObject EndPointR;
 
     public void Update()
     {
-        gameTime+=Time.deltaTime;
+        gameTime += Time.deltaTime;
     }
 
     public void addPlayerHandController(PlayerHandController _playerHandController)
@@ -84,6 +90,43 @@ public class GameManager : MonoBehaviour
     public void completeTotalExercise()
     {
         playerHandController.setIsExercise();
+    }
+
+    public void outOfTrackLine(string _position)
+    {
+        if (_position == "L")
+        {
+            StartPosL.GetComponent<Material>().color = Color.red;
+            TrackLineL.GetComponent<Material>().color = Color.red;
+            EndPointL.GetComponent<Material>().color = Color.red;
+        }
+        if (_position == "R")
+        {
+            StartPosR.GetComponent<Material>().color = Color.red;
+            TrackLineR.GetComponent<Material>().color = Color.red;
+            EndPointR.GetComponent<Material>().color = Color.red;
+        }
+    }
+
+    public void inToTrackLine(string _position)
+    {
+        if (_position == "L")
+        {
+            StartPosL.GetComponent<Material>().color = Color.green;
+            TrackLineL.GetComponent<Material>().color = Color.green;
+            EndPointL.GetComponent<Material>().color = Color.green;
+        }
+        if (_position == "R")
+        {
+            StartPosR.GetComponent<Material>().color = Color.green;
+            TrackLineR.GetComponent<Material>().color = Color.green;
+            EndPointR.GetComponent<Material>().color = Color.green;
+        }
+    }
+
+    public void EffectSound(string _soundName)
+    {
+        // soundManager.Play(_soundName, Sound.Effect);
     }
     public void setGrabDumbbell(bool _grab)
     {

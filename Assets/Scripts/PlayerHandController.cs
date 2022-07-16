@@ -112,14 +112,14 @@ public class PlayerHandController : MonoBehaviour
             //트랙 경로가 닿은 만큼 줄어들기(Slider처럼)
             isOutofTrackLine = false;
             isOnStartPos = false;
-
+            GameManager.Instance().inToTrackLine(controllerName);
+            GameManager.Instance().EffectSound("GoodPosture");
         }
         if (other.gameObject.name.Contains("EndPoint" + controllerName))
         {
             startPoint.SetActive(true);
             reachEndPoint = true;
         }
-
     }
     private void OnTriggerExit(Collider other) // 한쪽만 벗어나도 호출
     {
@@ -132,9 +132,8 @@ public class PlayerHandController : MonoBehaviour
         }
         if (other.gameObject.name.Contains("TrackLine" + controllerName))
         {
-            //트랙 경로를 벗어나면
-            //Warning
-            isOutofTrackLine = true;
+            GameManager.Instance().outOfTrackLine(controllerName);
+            GameManager.Instance().EffectSound("BadPosture");
         }
 
     }
