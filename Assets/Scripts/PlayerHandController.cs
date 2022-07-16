@@ -97,12 +97,10 @@ public class PlayerHandController : MonoBehaviour
                 otherHand.endPoint.SetActive(true);
                 if (count == 0)
                 {
-                    Debug.Log(count);
                     GameManager.Instance().setStartExercise(true);
                 }
                 else
                 {
-                    Debug.Log(count);
                     GameManager.Instance().addTimesOfExercise();
                 }
                 count++;

@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
         if (currentSetOfExercise == maxSetOfExercise)
         {
             completeTotalExercise();
+            Debug.Log("End Exercise");
         }
     }
 
