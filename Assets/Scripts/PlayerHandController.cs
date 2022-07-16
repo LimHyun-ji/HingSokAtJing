@@ -11,6 +11,7 @@ public class PlayerHandController : MonoBehaviour
     //private bool isDumbelGripRight;
     //private bool isDumbelGripLeft;
     protected int count;
+    protected Vector3 initialDumbbellPos;
     protected bool isDumbbellGrip;
     protected bool isOutofTrackLine;
     protected bool isExercise;
@@ -34,6 +35,7 @@ public class PlayerHandController : MonoBehaviour
         startPoint = GameObject.Find("StartPos" + controllerName);
         endPoint = GameObject.Find("EndPoint" + controllerName);
         trackLine = GameObject.Find("TrackLine" + controllerName);
+        initialDumbbellPos = dumbbell.transform.position;
         startPoint.SetActive(false);
         endPoint.SetActive(false);
         trackLine.SetActive(false);
@@ -41,13 +43,21 @@ public class PlayerHandController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(1))
         {
             Debug.Log(isDumbbellGrip);
+            dumbbell.transform.position = initialDumbbellPos;
+            otherHand.transform.position = otherHand.initialDumbbellPos;
             dumbbell.gameObject.transform.parent = null;
+
             isDumbbellGrip = false;
+            otherHand.isDumbbellGrip = false;
+
             trackLine.SetActive(false);
             endPoint.SetActive(false);
+
+            GameManager.Instance().setGrabDumbbell(false);
+
         }
     }
     private void OnMouseDrag()
