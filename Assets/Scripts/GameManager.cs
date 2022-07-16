@@ -32,10 +32,10 @@ public class GameManager : MonoBehaviour
         currentTimesOfExercise = 0;
     }
 
-    private float gameTime = 0f;
+    public float gameTime = 0f;
     private int[] timesOfExercise = new int[3];
-    private int currentTimesOfExercise;
-    private int currentSetOfExercise;
+    public int currentTimesOfExercise;
+    public int currentSetOfExercise;
     private int maxTimesOfExercise = 2;
     private int maxSetOfExercise = 3;
     private bool grabDumbbell = false;
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-
+        gameTime+=Time.deltaTime;
     }
 
     public void addPlayerHandController(PlayerHandController _playerHandController)

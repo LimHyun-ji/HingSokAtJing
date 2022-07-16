@@ -143,4 +143,9 @@ public class PlayerHandController : MonoBehaviour
     {
         isExercise = false;
     }
+
+    void ChangeGuideLineImage()
+    {
+        //GameObject 의 Material 바꿔주기
+    }
 }
