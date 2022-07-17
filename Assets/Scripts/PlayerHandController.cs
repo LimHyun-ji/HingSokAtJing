@@ -77,11 +77,11 @@ public class PlayerHandController : MonoBehaviour
         {
             isDumbbellGrip = true;
             dumbbell.transform.SetParent(gameObject.transform);//이건 나중에 없애줌
-
             if (otherHand.isDumbbellGrip)
             {
                 GameManager.Instance().setGrabDumbbell(true);
                 isExercise = true;
+                otherHand.setIsExercise(true);
                 otherHand.startPoint.SetActive(true);
                 startPoint.SetActive(true);
                 Debug.Log("Grab Dumbbell" + controllerName);
@@ -116,12 +116,14 @@ public class PlayerHandController : MonoBehaviour
                 //트랙 경로가 닿은 만큼 줄어들기(Slider처럼)
                 isOutofTrackLine = false;
                 isOnStartPos = false;
-
+                GameManager.Instance().inToTrackLine(controllerName);
+                // GameManager.Instance().EffectSound("GoodPosture");
             }
             if (other.gameObject.name.Contains("EndPoint" + controllerName))
             {
                 Debug.Log("End");
                 startPoint.SetActive(true);
+                endPoint.SetActive(false);
                 reachEndPoint = true;
             }
         }
@@ -140,16 +142,15 @@ public class PlayerHandController : MonoBehaviour
         if(isExercise) {
             if (other.gameObject.name.Contains("TrackLine" + controllerName))
             {
-                //트랙 경로를 벗어나면
-                //Warning
-                isOutofTrackLine = true;
+                GameManager.Instance().outOfTrackLine(controllerName);
+                // GameManager.Instance().EffectSound("Bad");
             }
         }
 
     }
 
-    public void setIsExercise()
+    public void setIsExercise(bool _isExercise)
     {
-        isExercise = false;
+        isExercise = _isExercise;
     }
 }
